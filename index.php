@@ -1,4 +1,7 @@
 <?php
+/* this is a part of Elad-Karako 's code for parsing multiple url-string using curl lib in PHP, will be used for short url expanding..*/
+
+
   require_once('src/encoding.php');
 //  require_once ('src/session.php') && set_session("highlight");
 //  require_once('src/whitespace_visualizer.php');
@@ -15,9 +18,7 @@
   $curl_handles = array_map(function ($url) {
     $curl_handle = curl_init();
     curl_setopt_array($curl_handle, [
-      CURLOPT_URL              => $url
-
-      , CURLOPT_URL            => $url// -------------------------------------------- set full target URL.
+        CURLOPT_URL            => $url// -------------------------------------------- set full target URL.
       , CURLOPT_CONNECTTIMEOUT => 30 // ---------------------------------------- timeout on connect, in seconds
       , CURLOPT_TIMEOUT        => 30 // ---------------------------------------- timeout on response, in seconds
       , CURLOPT_BUFFERSIZE     => 2048 // -------------------------------------------- smaller buffer-size for proxies.
@@ -30,11 +31,15 @@
       , CURLOPT_IPRESOLVE      => CURL_IPRESOLVE_V4 // ------------------------------- force IPv4 (instead of IPv6)
       , CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1// ---------------------------- force HTTP 1.1
 
+   // , CURLOPT_CUSTOMREQUEST => 'HEAD' /* TODO: add for only "HEAD" */
+   // , CURLOPT_NOBODY => true          /* TODO: add for only "HEAD" */
+
+
       /* redirects */
       , CURLOPT_FOLLOWLOCATION => true
       , CURLOPT_MAXREDIRS      => 5
       , CURLOPT_HTTPHEADER     => http_headers__arr2flat_arr([
-          "Accept"            => "*/*"
+            "Accept"          => "*/*"
           , "Connection"      => "keep-alive"
           , "Cache-Control"   => "no-cache"
           , "Pragma"          => "no-cache"
@@ -84,8 +89,7 @@
 
   //-----------------------------------------
   //-----------------------------------------
-  //-----------------------------------------      $opts[ CURLOPT_CUSTOMREQUEST ] = 'HEAD';
-//  $opts[ CURLOPT_NOBODY ] = true;
+  //-----------------------------------------
 
 
   $multi_information = array_map(function ($information) {
