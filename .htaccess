@@ -1,0 +1,59 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  Options +FollowSymlinks
+  Options -Indexes
+</IfModule>
+
+<ifModule mod_env.c>
+  SetEnv TZ Asia/Jerusalem
+  SetEnv KeepAlive On
+  SetEnv KeepAliveTimeout 100
+  SetEnv MaxKeepAliveRequests 500
+</ifModule>
+
+<IfModule php5_module>
+  php_value session.hash_function    "sha512"
+  php_flag session.use_trans_sid     Off
+  php_flag session.cookie_secure     Off
+  php_flag session.cookie_httponly   Off
+  php_flag session.use_only_cookies  On
+  php_flag session.use-strict-mode   On
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header unset Connection
+  Header unset Time-Zone
+  Header unset Keep-Alive
+  Header unset Access-Control-Allow-Origin
+  Header unset Access-Control-Allow-Headers
+  Header unset Access-Control-Expose-Headers
+  Header unset Access-Control-Allow-Credentials
+
+  Header set   Connection                         keep-alive
+  Header set   Time-Zone                          "Asia/Jerusalem"
+  Header set   Keep-Alive                         timeout=100,max=500
+  Header set   Access-Control-Allow-Origin        "*"
+  Header set   Access-Control-Allow-Headers       "Accept, Accept-Charset, Accept-Encoding, Accept-Language, Access-Control-Allow-Credentials, Access-Control-Allow-Headers, Access-Control-Allow-Methods, Access-Control-Allow-Origin, Access-Control-Expose-Headers, Access-Control-Max-Age, Access-Control-Request-Headers, Access-Control-Request-Method, Cache-Control, Connection, Content-Encoding, Content-Length, Content-Type, Cookie, Date, DNT, Expires, Host, If-Modified-Since, Keep-Alive, Origin, Pragma, Referer, Server, Set-Cookie, Transfer-Encoding, User-Agent, Vary, X-Content-Type-Options, X-CustomHeader, X-Modified, X-OTHER, X-PING, X-PINGOTHER, X-Powered-By, X-Requested-With"
+  Header set   Access-Control-Expose-Headers      "Accept, Accept-Charset, Accept-Encoding, Accept-Language, Access-Control-Allow-Credentials, Access-Control-Allow-Headers, Access-Control-Allow-Methods, Access-Control-Allow-Origin, Access-Control-Expose-Headers, Access-Control-Max-Age, Access-Control-Request-Headers, Access-Control-Request-Method, Cache-Control, Connection, Content-Encoding, Content-Length, Content-Type, Cookie, Date, DNT, Expires, Host, If-Modified-Since, Keep-Alive, Origin, Pragma, Referer, Server, Set-Cookie, Transfer-Encoding, User-Agent, Vary, X-Content-Type-Options, X-CustomHeader, X-Modified, X-OTHER, X-PING, X-PINGOTHER, X-Powered-By, X-Requested-With"
+  Header set   Access-Control-Allow-Credentials   "true"
+
+  Header set DNT "0"
+  Header set Accept-Ranges "bytes"
+  Header set Vary "Accept-Encoding"
+  Header set X-UA-Compatible "IE=edge,chrome=1"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Xss-Protection "1; mode=block"
+</IfModule>
+
+<IfModule pagespeed_module>
+  ModPagespeed on
+  ModPagespeedRetainComment "googleon*"
+  ModPagespeedRetainComment "googleoff*"
+  ModPagespeedRetainComment " _*"
+  ModPagespeedEnableFilters remove_comments
+  ModPagespeedEnableFilters collapse_whitespace
+  ModPagespeedEnableFilters extend_cache
+</IfModule>
+
+
